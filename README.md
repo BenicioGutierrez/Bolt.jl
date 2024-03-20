@@ -27,4 +27,4 @@ pkg> add https://github.com/xzackli/Bolt.jl
 *A linear matter power spectrum and gradient from Bolt.jl.*
 ![](example_linear_power_c.png) ![](docs/src/example_linear_power_c.png)
 
-
+* Note: Must use Julia version 1.8. Code does not work with current Julia version.
