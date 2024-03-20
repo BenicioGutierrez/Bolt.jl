@@ -53,15 +53,15 @@ const G_natural = ustrip(natural(float(NewtonianConstantOfGravitation))) # [Mpc^
 abstract type AbstractCosmoParams{T} end
 
 @with_kw struct CosmoParams{T} <: AbstractCosmoParams{T} @deftype T
-    h = 0.7  # hubble factor
-    Ω_r = 5.0469e-5  # radiation density
-    Ω_b = 0.046  # baryon density
-    Ω_c = 0.224  # cdm density
-    A = 2.097e-9 # scalar amplitude, 1e-10*exp(3.043)
-    n = 1.0  # scalar spectral index
-    Y_p = 0.24  # primordial helium fraction
-    N_ν = 3.046 #effective number of relativisic species (PDG25 value)
-    Σm_ν = 0.06 #sum of neutrino masses (eV), Planck 15 default ΛCDM value
+    h::T = 0.7  # hubble factor
+    Ω_r::T = 5.0469e-5  # radiation density
+    Ω_b::T = 0.046  # baryon density
+    Ω_c::T = 0.224  # cdm density
+    A::T = 2.097e-9 # scalar amplitude, 1e-10*exp(3.043)
+    n::T = 1.0  # scalar spectral index
+    Y_p::T = 0.24  # primordial helium fraction
+    N_ν::T = 3.046 #effective number of relativisic species (PDG25 value)
+    Σm_ν::T = 0.06 #sum of neutrino masses (eV), Planck 15 default ΛCDM value
     A_t::T = 0.0 # time-dependent energy density, initial conditions
 end
 
