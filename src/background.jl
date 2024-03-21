@@ -105,7 +105,7 @@ struct Background{T, IT, GT} <: AbstractBackground{T, IT, GT}
     ρ₀ℳ::IT
 end
 
-function Background(par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15) where T
+function Background(a, par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15) where T
     quad_pts, quad_wts =  gausslegendre( nq ) 
     ρ₀ℳ_ = spline([ρP_0(x2a(x), par,quad_pts,quad_wts)[1] for x in x_grid], x_grid)
     ℋ_  = spline([ℋ(x, par,quad_pts,quad_wts) for x in x_grid], x_grid)
@@ -114,7 +114,7 @@ function Background(par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15) w
         T(H₀(par)),
         T(η(0.0, par,quad_pts,quad_wts)),
         T(ρ_crit(par)),
-        T(Ω_Λ(par)),
+        T(Ω_Λ(a, par)),
 
         x_grid,
         convert(Array{T,1},quad_pts), #explicit call to convert instead of constructor for arrays
