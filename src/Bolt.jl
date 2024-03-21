@@ -62,7 +62,7 @@ abstract type AbstractCosmoParams{T} end
     Y_p::T = 0.24  # primordial helium fraction
     N_ν::T = 3.046 #effective number of relativisic species (PDG25 value)
     Σm_ν::T = 0.06 #sum of neutrino masses (eV), Planck 15 default ΛCDM value
-    A_t::T = 0.00 # time-dependent energy density, initial conditions
+    Ω_new::Function = x -> 0.0  # Function representing A_t, default is a constant 0
 end
 
 include("util.jl")
