@@ -90,7 +90,6 @@ struct Background{T, IT, GT} <: AbstractBackground{T, IT, GT}
     H₀::T
     η₀::T
     ρ_crit::T
-    Ω_Λ::T
 
     x_grid::GT
     quad_pts::Array{T,1}
@@ -114,7 +113,6 @@ function Background(a, par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15
         T(H₀(par)),
         T(η(0.0, par,quad_pts,quad_wts)),
         T(ρ_crit(par)),
-        T(Ω_Λ(a, par)),
 
         x_grid,
         convert(Array{T,1},quad_pts), #explicit call to convert instead of constructor for arrays
