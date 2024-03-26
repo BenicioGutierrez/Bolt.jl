@@ -15,7 +15,7 @@ function Ω_Λ(a, par::AbstractCosmoParams)
     return 1 - (par.Ω_r*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))  # dark energy density
                                          + par.Ω_b + par.Ω_c
                                          + Ω_ν
-                                         + Ω_new(a)  # New energy density
+                                         + par.Ω_new(a)  # New energy density
                                          ) #assume massive nus are non-rel today
 end
 
