@@ -5,7 +5,7 @@ const ζ = 1.2020569 #Riemann ζ(3) for phase space integrals
 
 H₀(par::AbstractCosmoParams) = par.h * km_s_Mpc_100
 ρ_crit(par::AbstractCosmoParams) = (3 / 8π) * H₀(par)^2 / G_natural
-function Ω_Λ(a, par::AbstractCosmoParams)
+function Ω_Λ(par::AbstractCosmoParams)
     #Below can definitely be more streamlined, I am just making it work for now
     Tγ = (15/ π^2 *ρ_crit(par) *par.Ω_r)^(1/4)
     νfac =(90 * ζ /(11 * π^4)) * (par.Ω_r * par.h^2 / Tγ) *((par.N_ν/3)^(3/4))
@@ -15,7 +15,7 @@ function Ω_Λ(a, par::AbstractCosmoParams)
     return 1 - (par.Ω_r*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))  # dark energy density
                                          + par.Ω_b + par.Ω_c
                                          + Ω_ν
-                                         + par.Ω_new(a)  # New energy density
+                                         + par.Ω_new(1)  # New energy density, current time
                                          ) #assume massive nus are non-rel today
 end
 
@@ -53,7 +53,7 @@ end
 function oldH_a(a, par::AbstractCosmoParams)
     return H₀(par) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + par.Ω_r*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3)) * a^(-4)
-                        + Ω_Λ(a, par))
+                        + Ω_Λ(par))
 end
 
 # Hubble parameter ȧ/a in Friedmann background
@@ -63,8 +63,8 @@ function H_a(a, par::AbstractCosmoParams,quad_pts,quad_wts)
     return H₀(par) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + ρ_ν/ρ_crit(par)
                         + par.Ω_r* a^(-4)*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))
-                        + Ω_Λ(a, par)
-                        + par.Ω_new(a))  # TODO: Check that this is correct syntax
+                        + Ω_Λ(par)
+                        )  # TODO: Check that this is correct syntax
 end
 # conformal time Hubble parameter, aH
 ℋ_a(a, par::AbstractCosmoParams,quad_pts,quad_wts) = a * H_a(a, par,quad_pts,quad_wts)
