@@ -47,9 +47,9 @@ function log10_k(kmin::T, kmax::T, nk) where T
     return T[10 ^(log10(kmin) + (log10(kmax/kmin))*(i-1)/(nk-1))  for i in 1:nk]
 end
 
-function log10_a(a_min::T, a_max::T, n_a) where T
+function log_a(a_min::T, a_max::T, n_a) where T
     a_min, a_max, n_a = assume_nondual(a_min), assume_nondual(a_max), assume_nondual(n_a)
-    return T[10 ^(log10(a_min) + (log10(a_max/a_min))*(i-1)/(n_a-1))  for i in 1:n_a]
+    return T[10 ^(log(a_min) + (log(a_max/a_min))*(i-1)/(n_a-1))  for i in 1:n_a]
 end
 
 function Θl(x_i, k, s_itp, bes, par::AbstractCosmoParams{T}, bg) where {T}
