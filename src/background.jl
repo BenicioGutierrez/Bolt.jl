@@ -53,7 +53,7 @@ end
 function oldH_a(a, par::AbstractCosmoParams)
     return H₀(par) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + par.Ω_r*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3)) * a^(-4)
-                        + Ω_Λ(par))
+                        + Ω_Λ(a, par))
 end
 
 # Hubble parameter ȧ/a in Friedmann background
@@ -63,7 +63,7 @@ function H_a(a, par::AbstractCosmoParams,quad_pts,quad_wts)
     return H₀(par) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + ρ_ν/ρ_crit(par)
                         + par.Ω_r* a^(-4)*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))
-                        + Ω_Λ(par)
+                        + Ω_Λ(a, par)
                         + Ω_new(a, par))  # TODO: Check that this is correct syntax
 end
 # conformal time Hubble parameter, aH
@@ -104,7 +104,7 @@ struct Background{T, IT, GT} <: AbstractBackground{T, IT, GT}
     ρ₀ℳ::IT
 end
 
-function Background(a, par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15) where T
+function Background(par::AbstractCosmoParams{T}; x_grid=-20.0:0.01:0.0, nq=15) where T
     quad_pts, quad_wts =  gausslegendre( nq ) 
     ρ₀ℳ_ = spline([ρP_0(x2a(x), par,quad_pts,quad_wts)[1] for x in x_grid], x_grid)
     ℋ_  = spline([ℋ(x, par,quad_pts,quad_wts) for x in x_grid], x_grid)
