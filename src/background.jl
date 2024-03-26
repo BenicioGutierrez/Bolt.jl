@@ -11,7 +11,7 @@ function Ω_Λ(a, par::AbstractCosmoParams)
     νfac =(90 * ζ /(11 * π^4)) * (par.Ω_r * par.h^2 / Tγ) *((par.N_ν/3)^(3/4))
     #^the factor that goes into nr approx to neutrino energy density, plus equal sharing ΔN_eff factor for single massive neutrino
     Ω_ν = par.Σm_ν*νfac/par.h^2
-    x = ln(a)
+
     return 1 - (par.Ω_r*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))  # dark energy density
                                          + par.Ω_b + par.Ω_c
                                          + Ω_ν
