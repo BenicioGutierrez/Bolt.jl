@@ -57,14 +57,13 @@ function oldH_a(a, par::AbstractCosmoParams)
 end
 
 # Hubble parameter ȧ/a in Friedmann background
-# TODO: Adjust for new energy density
 function H_a(a, par::AbstractCosmoParams,quad_pts,quad_wts)
     ρ_ν,_ = ρP_0(a,par,quad_pts,quad_wts) #FIXME dropped pressure, need to decide if we want it for tests?
     return H₀(par) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + ρ_ν/ρ_crit(par)
                         + par.Ω_r* a^(-4)*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))
                         + Ω_Λ(par)
-                        )  # TODO: Check that this is correct syntax
+                        + par.Ω_new(a) )  # TODO: Check that this is correct syntax
 end
 # conformal time Hubble parameter, aH
 ℋ_a(a, par::AbstractCosmoParams,quad_pts,quad_wts) = a * H_a(a, par,quad_pts,quad_wts)
