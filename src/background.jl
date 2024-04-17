@@ -63,8 +63,7 @@ function H_a(a, par::AbstractCosmoParams,quad_pts,quad_wts)
                         + par.Ω_r* a^(-4)*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))
                         + Ω_Λ(par)
                         )
-                    * ( 1 + par.Ω_new(a) )
-
+                    * (1 + par.Ω_new(a))
 end
 # conformal time Hubble parameter, aH
 ℋ_a(a, par::AbstractCosmoParams,quad_pts,quad_wts) = a * H_a(a, par,quad_pts,quad_wts)
