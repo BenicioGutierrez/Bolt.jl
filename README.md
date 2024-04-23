@@ -33,6 +33,6 @@ This version of Bolt.jl adds an energy density parameter.
 
 Demonstration of its use:
 
-[Test 1](file:///C:/Users/hp912/Downloads/Bolt_new_param.html)
+[Test 1](tests/Bolt_new_param.html)
 
-[Test 2](file:///C:/Users/hp912/Downloads/Bolt_new_param2.html)
+[Test 2](tests/Bolt_new_param2.html)
