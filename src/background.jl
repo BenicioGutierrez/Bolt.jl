@@ -58,7 +58,7 @@ end
 # Hubble parameter ȧ/a in Friedmann background
 function H_a(a, par::AbstractCosmoParams,quad_pts,quad_wts)
     ρ_ν,_ = ρP_0(a,par,quad_pts,quad_wts) #FIXME dropped pressure, need to decide if we want it for tests?
-    return H₀(par) *(1 + par.Ω_new(a)) * √((par.Ω_c + par.Ω_b ) * a^(-3)
+    return H₀(par) *(1 + par.Ω_new(log10(a))) * √((par.Ω_c + par.Ω_b ) * a^(-3)
                         + ρ_ν/ρ_crit(par)
                         + par.Ω_r* a^(-4)*(1+(2/3)*(7par.N_ν/8)*(4/11)^(4/3))
                         + Ω_Λ(par)
