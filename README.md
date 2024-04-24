@@ -30,9 +30,3 @@ pkg> add https://github.com/xzackli/Bolt.jl
 * Note: Currently uses Julia version 1.8. Code does not work with current Julia version.
 
 This version of Bolt.jl adds an energy density parameter.
-
-Demonstration of its use:
-
-[Test 1](tests/Bolt_new_param.html)
-
-[Test 2](tests/Bolt_new_param2.html)
