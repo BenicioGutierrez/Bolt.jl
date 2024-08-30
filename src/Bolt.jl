@@ -6,7 +6,8 @@ export IonizationHistory, AbstractIonizationHistory, IonizationIntegrator
 export Peebles, PeeblesI
 export ρ_σ,ρP_0,f0,dlnf0dlnq,θ,oldH_a #FIXME: quick hack to look at perts
 export Hierarchy, boltsolve, BasicNewtonian,unpack,rsa_perts!,boltsolve_rsa
-export source_grid, quadratic_k, cltt,log10_k,plin, source_grid_P, clte,clee
+export IE,initial_conditions,unpack,ie_unpack
+export source_grid, quadratic_k, cltt,log10_k,log_a,plin
 export z2a, a2z, x2a, a2x, z2x, x2z, to_ui, from_ui, dxdq
 
 using Parameters
@@ -48,21 +49,20 @@ unnatural(x, y) = UnitfulCosmo.unmpc(x, y)
 # all unit conversions. should distribute these in-situ someday. Mpc units
 const km_s_Mpc_100 = ustrip(natural(100.0u"km/s/Mpc"))  # [Mpc^-1]
 const G_natural = ustrip(natural(float(NewtonianConstantOfGravitation))) # [Mpc^2]
-const mass_natural = ustrip(UnitfulCosmo.mpc(1.0u"eV")) # [Mpc^-1] #FIXME? Might want to put neutrino conversion elsewhere, but need to convert eV
-
 
 abstract type AbstractCosmoParams{T} end
 
 @with_kw struct CosmoParams{T} <: AbstractCosmoParams{T} @deftype T
-    h = 0.7  # hubble factor
-    Ω_r = 5.0469e-5  # radiation density
-    Ω_b = 0.046  # baryon density
-    Ω_c = 0.224  # cdm density
-    A = 2.097e-9 # scalar amplitude, 1e-10*exp(3.043)
-    n = 1.0  # scalar spectral index
-    Y_p = 0.24  # primordial helium fraction
-    N_ν = 3.046 #effective number of relativisic species (PDG25 value)
-    Σm_ν = 0.06*mass_natural #sum of neutrino masses (eV), Planck 15 default ΛCDM value
+    h::T = 0.7  # hubble factor
+    Ω_r::T = 5.0469e-5  # radiation density
+    Ω_b::T = 0.046  # baryon density
+    Ω_c::T = 0.224  # cdm density
+    A::T = 2.097e-9 # scalar amplitude, 1e-10*exp(3.043)
+    n::T = 1.0  # scalar spectral index
+    Y_p::T = 0.24  # primordial helium fraction
+    N_ν::T = 3.046 #effective number of relativisic species (PDG25 value)
+    Σm_ν::T = 0.06 #sum of neutrino masses (eV), Planck 15 default ΛCDM value
+    Ω_new::Function = a -> 0.0  # New energy density, time-dependent
 end
 
 include("util.jl")
