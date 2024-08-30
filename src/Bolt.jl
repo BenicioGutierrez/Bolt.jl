@@ -78,4 +78,6 @@ include("ionization/recfast.jl")
 include("perturbations.jl")
 include("spectra.jl")
 
+export Spectra
+
 end
