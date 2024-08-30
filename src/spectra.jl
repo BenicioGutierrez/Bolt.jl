@@ -1,5 +1,3 @@
-module Spectra
-
 # OPTIMIZATION OPPORTUNITY
 # should save u and du over the x_xgrid, it's an ODE option
 # ℓᵧ is the Boltzmann hierarchy cutoff
@@ -198,4 +196,3 @@ function plin(k, 𝕡::AbstractCosmoParams{T},bg,ih,
     return PL
 end
 
-end
