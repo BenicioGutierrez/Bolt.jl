@@ -197,3 +197,5 @@ function plin(k, 𝕡::AbstractCosmoParams{T},bg,ih,
     PL= (2π^2 / k^3)*δm^2 *Pprim
     return PL
 end
+
+end
